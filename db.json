@@ -156,23 +156,6 @@
             "email": "harish.k@email.com",
             "phone": "9345678901",
             "postalCode": 600119
-        },
-        {
-            "name": "Ananya Balaji",
-            "id": 1,
-            "city": "Chennai",
-            "country": "India",
-            "subject": "Medical Laboratory Technology",
-            "passportDeclaration": "Yes",
-            "fitnessDeclaration": "Fit",
-            "courseName": "B.Sc MLT",
-            "date": "10-10-2010",
-            "state": "Tamil Nadu",
-            "subjects": "Pathology, Biochemistry",
-            "street": "21 Perambur High Road, Perambur",
-            "email": "ananya.b@email.com",
-            "phone": "9234567890",
-            "postalCode": 600011
         }
     ]
 }

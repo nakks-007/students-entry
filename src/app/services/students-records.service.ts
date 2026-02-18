@@ -12,6 +12,6 @@ export class StudentsRecordsService {
     ) { }
 
     getStudentsRecords() {
-        return this.http.get<Array<StudentsRecords>>("");
+        return this.http.get<Array<StudentsRecords>>('/api/studentsRecords');
     }
 }
