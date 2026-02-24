@@ -1,0 +1,35 @@
+<div>
+    <div>
+
+        <div class="container__login-box">
+            <div style="display: flex; flex-direction: column; align-items: center;"></div>
+            <img src="" alt="">
+            <h2>Login Page</h2>
+            <p>NGRX Simple Project with JSON Web Server</p>
+        </div>
+
+        <div>
+            <mat-card>
+                <img src="" alt="">
+                <h2>Login</h2>
+                <form [formGroup]="loginForm">
+
+                    User Name
+                    <mat-form-field class="full-width">
+                        <mat-label>User Name</mat-label>
+                        <input matInput type="text" formControlName="username">
+                    </mat-form-field>
+
+                    Password
+                    <mat-form-field class="full-width">
+                        <mat-label>Pass Word</mat-label>
+                        <input matInput type="password" formControlName="password">
+                    </mat-form-field>
+                </form>
+
+                <button mat-raised-button color="primary" [disabled]="!loginForm.valid"
+                    (click)="onClickLogin()">Login</button>
+            </mat-card>
+        </div>
+    </div>
+</div>
