@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
         this.loginForm = new FormGroup({
-            email: new FormControl('', [Validators.required, Validators.email]),
+            username: new FormControl('', [Validators.required]),
             password: new FormControl('', [Validators.required])
         })
     }
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         //Implement Authentication Logic, Send Creds to API for Authentication
 
         if (this.loginForm.valid) {
-            console.log('Form Submitted with ', this.loginForm);
+            console.log('Form Submitted with ', this.loginForm.value);
         }
 
         this.authService.login().subscribe(
