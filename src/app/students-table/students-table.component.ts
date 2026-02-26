@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { StudentsRecords } from '../state/students-records';
-import { AppState, selectAll } from '../state/students-selectors';
+import { StudentsRecords } from '../state/students-records.model';
+import { AppState, selectAllStudents } from '../state/students-selectors';
 import * as Actions from '../state/students-records.action';
 
 @Component({
@@ -16,7 +16,7 @@ import * as Actions from '../state/students-records.action';
 
 export class StudentTableComponent implements OnInit {
     dataSource: any = [];
-    dataSource$: Observable<StudentsRecords[]> = this.store.select(selectAll);
+    dataSource$: Observable<StudentsRecords[]> = this.store.select(selectAllStudents);
     displayColumns: string[] = ['name', 'city', 'country', 'subject', 'passportDeclaration', 'fitnessDeclaration', 'courseName', 'date', 'state', 'subjects', 'street', 'email', 'phone', 'postalCode'];
     constructor(private store: Store<AppState>) {
         this.store.dispatch(Actions.callStudentsRecordsApi());
@@ -25,7 +25,7 @@ export class StudentTableComponent implements OnInit {
     ngOnInit(): void {
         this.dataSource$.subscribe(
             (res: any) => {
-                this.dataSource = res?.studentsRecords;
+                this.dataSource = res;
             }
         )
     }
