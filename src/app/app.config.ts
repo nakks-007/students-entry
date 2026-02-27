@@ -7,6 +7,7 @@ import { provideState, provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from "@ngrx/store-devtools";
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore, routerReducer } from '@ngrx/router-store';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 import { routes } from './app.routes';
 import { studentsReducer } from './state/students.reducer';
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAnimationsAsync(),
+    provideNativeDateAdapter(),
     provideEffects(StudentsRecordsEffects),
     provideState({
       name: 'students',
