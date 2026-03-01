@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY } from "rxjs";
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 
-import { actionsList, addStudent, addStudentSuccess } from "./students-records.action";
+import { actionsList, addStudent, addStudentSuccess, updateStudent, updateStudentSuccess } from "./students-records.action";
 import { StudentsRecordsService } from "../services/students-records.service";
 
 @Injectable()
@@ -27,6 +27,19 @@ export class StudentsRecordsEffects {
                         addStudentSuccess({ student: savedStudent })
                     ),
                     catchError(() => EMPTY)
+                )
+            )
+        )
+    );
+
+    updateStudent$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(updateStudent),
+            exhaustMap(({ student }) =>
+                this.studentsRecordsService.updateStudent(student).pipe(
+                    map(updatedStudent =>
+                        updateStudentSuccess({ student: updatedStudent })
+                    )
                 )
             )
         )

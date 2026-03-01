@@ -20,6 +20,6 @@ export class StudentsRecordsService {
     }
 
     updateStudent(student: StudentsRecords) {
-        return this.http.put<StudentsRecords>(`/api/students/${student.id}`, student)
+        return this.http.put<StudentsRecords>(`/api/studentsRecords/${student.id}`, student)
     }
 }

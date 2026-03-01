@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -7,9 +7,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
-import { addStudent, updateStudent } from '../state/students-records.action';
+import { addStudent, addStudentSuccess, updateStudent, updateStudentSuccess } from '../state/students-records.action';
 import { Store } from '@ngrx/store';
 import { AppState, selectStudentById } from '../state/students-selectors';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-student-records',
@@ -32,9 +33,18 @@ export class StudentRecordsComponent {
 
   studentDetailsForm: FormGroup;
   @Input() studentId: number | null = null;
+  @Output() saveSuccess = new EventEmitter<void>();
   isEditMode = false;
 
-  constructor(private fb: FormBuilder, private store: Store<AppState>) {
+  ngOnInit() {
+    this.actions$.pipe(
+      ofType(addStudentSuccess, updateStudentSuccess)
+    ).subscribe(() => {
+      this.saveSuccess.emit();
+    });
+  }
+
+  constructor(private fb: FormBuilder, private store: Store<AppState>, private actions$: Actions) {
     this.studentDetailsForm = this.fb.group({
       name: ['', Validators.required],
       country: ['', Validators.required],
@@ -55,7 +65,6 @@ export class StudentRecordsComponent {
   ngOnChanges(changes: SimpleChanges) {
     if (changes['studentId'] && this.studentId) {
       this.isEditMode = true;
-
       this.store.select(selectStudentById(this.studentId))
         .subscribe(student => {
           if (student) {
@@ -68,20 +77,27 @@ export class StudentRecordsComponent {
   onSubmit() {
     if (this.studentDetailsForm.valid) {
 
-      const studentData = {
-        ...this.studentDetailsForm.value,
-        id: this.studentId
-      };
-
       if (this.isEditMode) {
-        console.log(studentData);
+
+        const studentData = {
+          ...this.studentDetailsForm.value,
+          id: this.studentId
+        };
+
         this.store.dispatch(updateStudent({ student: studentData }));
+
       } else {
+
+        const studentData = {
+          ...this.studentDetailsForm.value
+        };
+
         this.store.dispatch(addStudent({ student: studentData }));
       }
 
       this.studentDetailsForm.reset();
       this.isEditMode = false;
+      this.studentId = null;
     }
   }
 }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Store } from '@ngrx/store';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Observable, Subject } from 'rxjs';
 import { StudentsRecords } from '../state/students-records.model';
 import { AppState, selectAllStudents, selectStudentById } from '../state/students-selectors';
@@ -12,7 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
     selector: 'app-students-table',
     standalone: true,
-    imports: [MatTableModule, MatInput, FormsModule, FormsModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule],
+    imports: [MatTableModule, MatInput, FormsModule, FormsModule, ReactiveFormsModule, MatInputModule, MatFormFieldModule, CommonModule],
     templateUrl: './students-table.component.html',
     styleUrl: './students-table.component.scss'
 })

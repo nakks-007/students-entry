@@ -17,6 +17,11 @@ export class DashboardComponent {
 
   handleEdit(id: number) {
     this.selectedStudentId = id;
-    this.selectedTabIndex = 1; // switch to Add Student tab
+    this.selectedTabIndex = 1;
+  }
+
+  switchToList() {
+    this.selectedTabIndex = 0;
+    this.selectedStudentId = null;
   }
 }

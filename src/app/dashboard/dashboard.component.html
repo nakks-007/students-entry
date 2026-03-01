@@ -4,7 +4,7 @@
     </mat-tab>
 
     <mat-tab label="Add Student">
-        <app-student-records [studentId]="selectedStudentId"></app-student-records>
+        <app-student-records [studentId]="selectedStudentId" (saveSuccess)="switchToList()"></app-student-records>
     </mat-tab>
 
     <mat-tab label="Contact Us">
