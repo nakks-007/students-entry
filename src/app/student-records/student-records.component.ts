@@ -68,10 +68,35 @@ export class StudentRecordsComponent {
       this.store.select(selectStudentById(this.studentId))
         .subscribe(student => {
           if (student) {
-            this.studentDetailsForm.patchValue(student);
+            const formattedStudent = {
+              ...student,
+              date: this.convertToDate(student.date)
+            };
+            this.studentDetailsForm.patchValue(formattedStudent);
           }
         });
     }
+  }
+
+  convertToDate(dateValue: any): Date | null {
+    if (!dateValue) return null;
+
+    // If already ISO or Date-compatible
+    if (!isNaN(Date.parse(dateValue))) {
+      return new Date(dateValue);
+    }
+
+    // Handle dd-MM-yyyy manually
+    const parts = dateValue.split('-');
+    if (parts.length === 3) {
+      const day = +parts[0];
+      const month = +parts[1] - 1;
+      const year = +parts[2];
+
+      return new Date(year, month, day);
+    }
+
+    return null;
   }
 
   onSubmit() {
