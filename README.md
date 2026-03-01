@@ -15,6 +15,7 @@ This project allows users to:
 * Edit existing student records
 * Use NgRx for state management
 * Demo form & table UI using Angular Material
+* Login and Authentication partially implemented
 
 ---
 
