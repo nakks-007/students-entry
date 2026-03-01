@@ -1,10 +1,10 @@
 <mat-tab-group [(selectedIndex)]="selectedTabIndex">
     <mat-tab label="View Students">
-        <app-students-table  (switchTab)="selectedTabIndex = $event"></app-students-table>
+        <app-students-table (editStudent)="handleEdit($event)"></app-students-table>
     </mat-tab>
 
     <mat-tab label="Add Student">
-        <app-student-records></app-student-records>
+        <app-student-records [studentId]="selectedStudentId"></app-student-records>
     </mat-tab>
 
     <mat-tab label="Contact Us">

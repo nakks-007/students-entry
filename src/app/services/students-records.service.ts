@@ -18,4 +18,8 @@ export class StudentsRecordsService {
     addStudent(student: StudentsRecords) {
         return this.http.post<StudentsRecords>('/api/studentsRecords', student);
     }
+
+    updateStudent(student: StudentsRecords) {
+        return this.http.put<StudentsRecords>(`/api/students/${student.id}`, student)
+    }
 }

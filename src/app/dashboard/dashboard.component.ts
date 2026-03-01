@@ -13,5 +13,10 @@ import { ContactUsComponent } from '../contact-us/contact-us.component';
 })
 export class DashboardComponent {
   selectedTabIndex = 0;
+  selectedStudentId: number | null = null;
 
+  handleEdit(id: number) {
+    this.selectedStudentId = id;
+    this.selectedTabIndex = 1; // switch to Add Student tab
+  }
 }
