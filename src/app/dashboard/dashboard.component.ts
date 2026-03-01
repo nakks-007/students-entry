@@ -12,5 +12,6 @@ import { ContactUsComponent } from '../contact-us/contact-us.component';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  selectedTabIndex = 0;
 
 }

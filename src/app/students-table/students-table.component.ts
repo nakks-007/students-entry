@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
@@ -21,7 +21,9 @@ export class StudentTableComponent implements OnInit {
     dataSource: any = [];
     dataSource$: Observable<StudentsRecords[]> = this.store.select(selectAllStudents);
     displayColumns: string[] = ['name', 'city', 'country', 'subject', 'passportDeclaration', 'fitnessDeclaration', 'courseName', 'date', 'state', 'subjects', 'street', 'email', 'phone', 'postalCode'];
-    studentsControl: FormControl = new FormControl()
+    studentsControl: FormControl = new FormControl();
+    @Output() switchTab = new EventEmitter<number>();
+
     constructor(private store: Store<AppState>) {
         this.store.dispatch(Actions.callStudentsRecordsApi());
     }
@@ -44,5 +46,11 @@ export class StudentTableComponent implements OnInit {
                 );
             }
         );
+    }
+
+    printData(id: string) {
+        console.log(id, 'Selected');
+        this.switchTab.emit(1);
+
     }
 }
