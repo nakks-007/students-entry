@@ -7,6 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTabsModule } from '@angular/material/tabs';
+import { addStudent } from '../state/students-records.action';
+import { Store } from '@ngrx/store';
+import { AppState } from '../state/students-selectors';
 
 @Component({
   selector: 'app-student-records',
@@ -29,7 +32,7 @@ export class StudentRecordsComponent {
 
   studentDetailsForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.studentDetailsForm = this.fb.group({
       name: ['', Validators.required],
       country: ['', Validators.required],
@@ -49,7 +52,9 @@ export class StudentRecordsComponent {
 
   onSubmit() {
     if (this.studentDetailsForm.valid) {
-      console.log(this.studentDetailsForm.value);
+      const newStudent = this.studentDetailsForm.value;
+      this.store.dispatch(addStudent({ student: newStudent }));
+      this.studentDetailsForm.reset();
     }
   }
 }

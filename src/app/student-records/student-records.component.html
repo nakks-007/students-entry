@@ -117,7 +117,7 @@
                 </div>
 
                 <div class="student-entry-form__form-row--input-buttons">
-                    <button type="submit" color="primary" [disabled]="studentDetailsForm.invalid" mat-button>
+                    <button type="submit" color="primary" [disabled]="studentDetailsForm.invalid" mat-button (click)="onSubmit()">
                         Submit
                     </button>
 
