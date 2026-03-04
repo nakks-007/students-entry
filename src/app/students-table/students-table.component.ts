@@ -41,7 +41,11 @@ export class StudentTableComponent implements OnInit {
                 const studentsRecord = this.store.select(selectStudentById(value));
                 studentsRecord.subscribe(
                     (res: any) => {
-                        this.dataSource = [res];
+                        if (res) {
+                            this.dataSource = [res];
+                        } else {
+                            this.dataSource = [];
+                        }
                         console.log([res], 'Selected Record');
                     }
                 );
